@@ -4,8 +4,6 @@ import { NavUser } from "./nav-user";
 import HeaderSidebar from "./header-sidebar";
 import { NavMain } from "./nav-main";
 import {
-  BookOpen,
-  Bot,
   Frame,
   LifeBuoy,
   Map,
@@ -13,7 +11,6 @@ import {
   Shirt,
   Send,
   Settings2,
-  SquareTerminal,
 } from "lucide-react"
 
 type SidebarProps = {

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import AppSidebar from "./components/sidebar/app-sidebar";
+import HeaderDashboard from "./components/header";
 
 const AdminDashboard = () => {
   const [isOpen, setIsOpen] = useState(true);
@@ -30,14 +31,9 @@ const AdminDashboard = () => {
 
         {/* Conteúdo principal */}
         <main className="flex-1 bg-[#09090b] rounded-2xl w-full p-3 relative z-10">
-          <header className="flex items-center">
-            <button 
-              className="p-2 bg-gray-800 text-white rounded-md" 
-              onClick={() => setIsOpen(!isOpen)}
-            >
-              {isOpen ? "Fechar Sidebar" : "Abrir Sidebar"}
-            </button>
-          </header>
+          {/* Passando `isOpen` e `setIsOpen` para o HeaderDashboard */}
+          <HeaderDashboard isOpen={isOpen} setIsOpen={setIsOpen} />
+
           <p>Conteúdo do dashboard</p>
         </main>
       </div>
