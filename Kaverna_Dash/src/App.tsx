@@ -1,14 +1,13 @@
-import { useState } from 'react'
-import './App.css'
+import React from 'react';
+import { AuthProvider } from './context/AuthContext';
+import AppRoutes from './routers/AppRouter'; // Criar um arquivo separado para as rotas
 
-
-function App() {
-
+const App = () => {
   return (
-    <>
+    <AuthProvider>
+      <AppRoutes />
+    </AuthProvider>
+  );
+};
 
-    </>
-  )
-}
-
-export default App
+export default App;
