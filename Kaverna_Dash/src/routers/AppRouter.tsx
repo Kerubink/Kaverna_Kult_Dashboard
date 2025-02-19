@@ -1,30 +1,52 @@
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
-import { useAuth } from '@/context/AuthContext';
-import AdminDashboard from '@/pages/adminDashboard/adminDashboard';
-import ArtistDashboard from '@/pages/artistDashboard/artistDashboard';
-import Login from '@/pages/login/loginPage';
+import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
+import { useAuth } from "@/context/AuthContext";
+import Login from "@/pages/login/loginPage";
+import AdminDashboard from "@/pages/adminDashboard/adminDashboard";
+import ArtistDashboard from "@/pages/artistDashboard/artistDashboard";
+import Home from "@/pages/adminDashboard/components/pages/home";
+import Pedidos from "@/pages/adminDashboard/components/pages/pedidos";
 
 const AppRoutes = () => {
   const { user, role, loading } = useAuth();
 
-  // Se ainda estiver carregando, não renderiza nada
   if (loading) return <div>Carregando...</div>;
 
   return (
     <Router>
       <Routes>
         <Route path="/login" element={<Login />} />
+
+        {/* Rotas de Admin */}
+        {user && role === "admin" ? (
+          <Route path="/admin/*" element={<AdminDashboard />}>
+            <Route path="home" element={<Home />} />
+            <Route path="pedidos" element={<Pedidos />} />
+          </Route>
+        ) : (
+          <Route path="/admin/*" element={<Navigate to="/login" />} />
+        )}
+
+        {/* Rotas de Artista */}
+        {user && role === "artist" ? (
+          <Route path="/artist/*" element={<ArtistDashboard />} />
+        ) : (
+          <Route path="/artist/*" element={<Navigate to="/login" />} />
+        )}
+
+        {/* Redirecionamento padrão */}
         <Route
-          path="/admin/*"
-          element={user && role === 'admin' ? <AdminDashboard /> : <Navigate to="/login" />}
-        />
-        <Route
-          path="/artist/*"
-          element={user && role === 'artist' ? <ArtistDashboard /> : <Navigate to="/login" />}
-        />
-        <Route 
-          path="*" 
-          element={user ? (role === 'admin' ? <Navigate to="/admin" /> : <Navigate to="/artist" />) : <Navigate to="/login" />} 
+          path="*"
+          element={
+            user ? (
+              role === "admin" ? (
+                <Navigate to="/admin/home" />
+              ) : (
+                <Navigate to="/artist" />
+              )
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
         />
       </Routes>
     </Router>

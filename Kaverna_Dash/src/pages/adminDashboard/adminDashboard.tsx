@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import AppSidebar from "./components/sidebar/app-sidebar";
 import HeaderDashboard from "./components/header";
+import { Outlet } from "react-router-dom";
 
 const AdminDashboard = () => {
   const [isOpen, setIsOpen] = useState(true);
@@ -31,10 +32,10 @@ const AdminDashboard = () => {
 
         {/* Conteúdo principal */}
         <main className="flex-1 bg-[#09090b] rounded-2xl w-full p-3 relative z-10">
-          {/* Passando `isOpen` e `setIsOpen` para o HeaderDashboard */}
           <HeaderDashboard isOpen={isOpen} setIsOpen={setIsOpen} />
 
-          <p>Conteúdo do dashboard</p>
+          {/* Conteúdo: aqui deve abrir as paginas das rotas de admin */}
+          <Outlet />
         </main>
       </div>
     </section>

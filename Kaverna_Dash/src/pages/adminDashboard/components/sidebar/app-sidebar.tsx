@@ -33,7 +33,7 @@ const data = {
       items: [
         {
           title: "Todos os Pedidos",
-          url: "/pedidos",
+          url: "/admin/pedidos",
         },
         {
           title: "Pedidos Pendentes",
