@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import AppSidebar from "./components/sidebar/app-sidebar";
-import HeaderDashboard from "./components/header";
+import HeaderDashboard from "./components/header/header";
 import { Outlet } from "react-router-dom";
 
 const AdminDashboard = () => {
@@ -25,15 +25,14 @@ const AdminDashboard = () => {
         {/* Overlay no Mobile */}
         {isMobile && isOpen && (
           <div 
-            className="fixed inset-0 bg-black/50 z-20" 
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-20" 
             onClick={() => setIsOpen(false)}
           />
         )}
 
         {/* Conteúdo principal */}
-        <main className="flex-1 bg-[#09090b] rounded-2xl w-full p-3 relative z-10">
+        <main className="flex-1 flex flex-col bg-[#09090b] rounded-2xl w-full p-3 relative z-10">
           <HeaderDashboard isOpen={isOpen} setIsOpen={setIsOpen} />
-
           {/* Conteúdo: aqui deve abrir as paginas das rotas de admin */}
           <Outlet />
         </main>

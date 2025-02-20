@@ -1,10 +1,15 @@
-import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Navigate,
+} from "react-router-dom";
 import { useAuth } from "@/context/AuthContext";
 import Login from "@/pages/login/loginPage";
 import AdminDashboard from "@/pages/adminDashboard/adminDashboard";
 import ArtistDashboard from "@/pages/artistDashboard/artistDashboard";
-import Home from "@/pages/adminDashboard/components/pages/home";
-import Pedidos from "@/pages/adminDashboard/components/pages/pedidos";
+import Home from "@/pages/adminDashboard/pages/home/home";
+import Pedidos from "@/pages/adminDashboard/pages/pedidos";
 
 const AppRoutes = () => {
   const { user, role, loading } = useAuth();
@@ -19,6 +24,7 @@ const AppRoutes = () => {
         {/* Rotas de Admin */}
         {user && role === "admin" ? (
           <Route path="/admin/*" element={<AdminDashboard />}>
+            <Route index element={<Navigate to="home" replace />} />{/* Redireciona /admin para /admin/home */}
             <Route path="home" element={<Home />} />
             <Route path="pedidos" element={<Pedidos />} />
           </Route>
