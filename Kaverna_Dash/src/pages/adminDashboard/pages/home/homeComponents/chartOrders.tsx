@@ -42,7 +42,7 @@ const chartConfig = {
 
 export function ChartOrders() {
   return (
-    <Card className="border-white">
+    <Card className="bg-transparent">
       <CardHeader className="text-white">
         <CardTitle>Bar Chart - Label</CardTitle>
         <CardDescription>January - June 2024</CardDescription>

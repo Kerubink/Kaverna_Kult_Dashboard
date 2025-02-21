@@ -33,15 +33,15 @@ const data = {
       items: [
         {
           title: "Todos os Pedidos",
-          url: "/admin/pedidos",
+          url: "/admin/pedidos/todos_os_pedidos",
         },
         {
-          title: "Pedidos Pendentes",
-          url: "/pedidos/pendentes",
+          title: "Pedidos para devolução",
+          url: "/admin/pedidos/pedidos_devolucao",
         },
         {
-          title: "Pedidos Concluídos",
-          url: "/pedidos/concluidos",
+          title: "Pedidos cancelados",
+          url: "/admin/pedidos/pedidos_cancelados",
         },
       ],
     },
@@ -52,16 +52,16 @@ const data = {
       items: [
         {
           title: "Lista de Artistas",
-          url: "/artistas",
+          url: "/admin/artistas/lista_de_artistas",
         },
         {
           title: "Solicitações de Parceria",
-          url: "/artistas/solicitacoes",
+          url: "/admin/artistas/solicitacoes",
         },
-        {
-          title: "Meus Designs",
-          url: "/artistas/meus-designs",
-        },
+        // {
+        //   title: "Meus Designs",
+        //   url: "/artistas/meus-designs",
+        // },
       ],
     },
     {

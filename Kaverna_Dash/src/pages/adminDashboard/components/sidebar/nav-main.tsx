@@ -59,8 +59,6 @@ export function NavMain({
                 <ul className="mx-3.5 flex min-w-0 translate-x-px flex-col gap-1 border-l border-[#333336] px-2.5 py-0.5 group-data-[collapsible=icon]:hidden">
                   {item.items?.map((subItem) => (
                     <Link to={subItem.url} key={subItem.title}>
-                      {" "}
-                      {/* ✅ Agora a key está no elemento mais externo */}
                       <li className="flex h-7 min-w-0 -translate-x-px items-center gap-2 overflow-hidden rounded-md px-2 text-sidebar-foreground outline-none ring-sidebar-ring hover:bg-neutral-800 hover:text-sidebar-accent-foreground focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 [&>svg]:text-sidebar-accent-foreground data-[active=true]:bg-sidebar-accent data-[active=true]:text-sidebar-accent-foreground text-sm group-data-[collapsible=icon]:hidden">
                         <div>
                           <span>{subItem.title}</span>

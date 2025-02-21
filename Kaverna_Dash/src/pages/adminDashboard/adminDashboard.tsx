@@ -33,8 +33,7 @@ const AdminDashboard = () => {
         {/* Conteúdo principal */}
         <main className="flex-1 flex flex-col bg-[#09090b] rounded-2xl w-full p-3 relative z-10">
           <HeaderDashboard isOpen={isOpen} setIsOpen={setIsOpen} />
-          {/* Conteúdo: aqui deve abrir as paginas das rotas de admin */}
-          <Outlet />
+          <Outlet/>
         </main>
       </div>
     </section>

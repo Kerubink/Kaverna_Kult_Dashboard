@@ -10,6 +10,7 @@ import {
   TableBody,
   TableCaption,
   TableCell,
+  TableFooter,
   TableHead,
   TableHeader,
   TableRow,
@@ -63,17 +64,16 @@ const invoices = [
 function RecentSales() {
   return (
     <>
-      <Card className="text-white flex flex-col">
+      <Card className="text-white bg-transparent flex flex-col">
         <CardHeader>
           <CardTitle>Vendas Recentes</CardTitle>
           <CardDescription>Últimas vendas registradas</CardDescription>
         </CardHeader>
         <CardContent className="flex-1 flex">
-          <Table className="flex-1 ">
-            <TableCaption>A list of your recent invoices.</TableCaption>
+          <Table className="flex-1 h-full">
             <TableHeader>
               <TableRow>
-                <TableHead className="w-[100px]">Invoice</TableHead>
+                <TableHead className="w-[100px]">ID</TableHead>
                 <TableHead>Status</TableHead>
                 <TableHead>Method</TableHead>
                 <TableHead className="text-right">Amount</TableHead>
@@ -93,6 +93,12 @@ function RecentSales() {
                 </TableRow>
               ))}
             </TableBody>
+            <TableFooter>
+              <TableRow>
+                <TableCell colSpan={3}>Total</TableCell>
+                <TableCell className="text-right">$2,500.00</TableCell>
+              </TableRow>
+            </TableFooter>
           </Table>
         </CardContent>
       </Card>
