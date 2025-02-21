@@ -23,48 +23,69 @@ import {
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
-} from "@/components/ui/pagination"
+} from "@/components/ui/pagination";
 import { Input } from "@/components/ui/input";
-import { ComboboxStatus } from "./boxStatus";
 import { Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
-function TableAllOrders() {
+function TableArtistas() {
   return (
     <Card className="text-white h-[750px] lg:h-[950px] border-none overflow-hidden flex gap-4 flex-col">
       <CardHeader className="rounded-2xl p-0 py-3">
-        <CardTitle className="text-2xl font-bold">PEDIDOS</CardTitle>
-        <CardDescription className="text-white">Página de gereciamento de pedidos</CardDescription>
+        <CardTitle className="text-2xl font-bold">ARTISTAS</CardTitle>
+        <CardDescription className="text-white">
+          Lista de artistas parceiros
+        </CardDescription>
       </CardHeader>
       <CardContent className="p-4 bg-neutral-900 rounded-2xl flex-1 flex flex-col">
         <Card className="text-white border-none flex flex-1 flex-col gap-5">
           <CardHeader className="m-0 p-0">
             <CardTitle className="flex justify-between">
-              <Input placeholder="Buscar..." className="w-[160px] lg:w-[350px]" />
+              <Input
+                placeholder="Buscar..."
+                className="w-[160px] lg:w-[350px]"
+              />
             </CardTitle>
           </CardHeader>
-          <CardContent className="p-0 rounded-md flex-1">
+          <CardContent className="p-0 rounded-md border-none flex-1">
             <ScrollArea className="h-full max-w-[300px] min-w-full  lg:w-full whitespace-nowrap rounded-md border">
               <Table className="">
                 <TableHeader>
                   <TableRow>
-                    <TableHead className="w-[100px]">ID</TableHead>
-                    <TableHead>Cliente</TableHead>
-                    <TableHead>Data</TableHead>
-                    <TableHead className="text-right">Total</TableHead>
+                    <TableHead>Artista</TableHead>
+                    <TableHead>Contatos</TableHead>
+                    <TableHead>Portfólio</TableHead>
+                    <TableHead className="text-right">Estampas</TableHead>
+                    <TableHead className="text-right">Popularidade</TableHead>
                     <TableHead className="text-right">Status</TableHead>
                     <TableHead className="text-right"></TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   <TableRow>
-                    <TableCell className="font-medium">INV001</TableCell>
-                    <TableCell>João</TableCell>
-                    <TableCell>15/01/2022</TableCell>
-                    <TableCell className="text-right">R$100</TableCell>
-                    <TableCell className="text-right">Paid</TableCell>
+                    <TableCell className="flex gap-3">
+                      <Avatar>
+                        <AvatarImage src="https://github.com/shadcn.png" />
+                        <AvatarFallback>CN</AvatarFallback>
+                      </Avatar>
+                      <div>
+                        <h2 className="text-white font-bold">João</h2>
+                        <span className="text-neutral-500">@joaodasartes</span>
+                      </div>
+                    </TableCell>
+                    <TableCell className="">
+                      <h2>(99)99999-9999</h2>
+                      <a href="mailto:joaozinho@gmail.com">
+                        Joaozinho@gmail.com
+                      </a>
+                    </TableCell>
+                    <TableCell>link.com.br</TableCell>
+                    <TableCell className="text-right">15</TableCell>
+                    <TableCell className="text-right">1</TableCell>
+                    <TableCell className="text-right">Ativo</TableCell>
                     <TableCell className="text-right">
-                        {/* esse botao deve levar para a rota "produto:id" que mostra as informações detalhadas do produto*/}
+                      {/* esse botao deve levar para a rota "produto:id" que mostra as informações detalhadas do produto*/}
                       <Button className="w-6 h-6 p-4 bg-transparent cursor-pointer">
                         <Eye size={20} />
                       </Button>
@@ -99,4 +120,4 @@ function TableAllOrders() {
   );
 }
 
-export default TableAllOrders;
+export default TableArtistas;

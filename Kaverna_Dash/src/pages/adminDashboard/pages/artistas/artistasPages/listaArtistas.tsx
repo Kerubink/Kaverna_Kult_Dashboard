@@ -1,7 +1,9 @@
+import TableArtistas from "../artistasComponents/tableArtistas";
+
 function ListaArtistas() {
     return ( 
         <>
-        <h1>todos os artistas</h1>
+        <TableArtistas/>
         </>
      );
 }

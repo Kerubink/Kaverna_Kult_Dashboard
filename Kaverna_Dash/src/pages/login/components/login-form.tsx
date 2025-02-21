@@ -76,7 +76,7 @@ export function LoginForm({ className, ...props }) {
                 <Button
                   type="button"
                   variant="outline"
-                  className="w-full border-[#17171a]"
+                  className="w-full text-black border-[#17171a] hover:bg-neutral-300"
                   onClick={handleGoogleLogin}
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="w-5 h-5 mr-2">
@@ -89,7 +89,7 @@ export function LoginForm({ className, ...props }) {
                 </Button>
               </div>
               <div className="relative text-center text-[#17171a] text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t after:border-border">
-                <span className="relative z-10 text-[#828288] text-[13px] bg-[#09090b] px-2 text-muted-foreground">
+                <span className="relative z-10 text-[#828288] text-[13px] bg-[#09090b] px-2 ">
                   Ou continuar com
                 </span>
               </div>
@@ -122,7 +122,7 @@ export function LoginForm({ className, ...props }) {
                     onChange={(e) => setPassword(e.target.value)}
                   />
                 </div>
-                <Button type="submit" className="w-full bg-white text-black">
+                <Button type="submit" className="w-full bg-white text-black hover:bg-neutral-300">
                   Login
                 </Button>
               </div>
