@@ -46,17 +46,17 @@ const data = {
       ],
     },
     {
-      title: "Artistas",
-      url: "/artistas",
+      title: "Parceiros",
+      url: "/parceiros",
       icon: Users,
       items: [
         {
-          title: "Lista de Artistas",
-          url: "/admin/artistas/lista_de_artistas",
+          title: "Artistas",
+          url: "/admin/parceiros/artistas",
         },
         {
-          title: "Solicitações de Parceria",
-          url: "/admin/artistas/solicitacoes",
+          title: "Graficas",
+          url: "/admin/parceiros/graficas",
         },
         // {
         //   title: "Meus Designs",
@@ -70,16 +70,16 @@ const data = {
       icon: Shirt,
       items: [
         {
+          title: "Adicionar Produtos",
+          url: "/admin/produtos/criar_produto",
+        },
+        {
           title: "Todas as Camisetas",
-          url: "/produtos",
+          url: "/admin/produtos/lista_de_produtos",
         },
         {
-          title: "Novas Adições",
-          url: "/produtos/novas",
-        },
-        {
-          title: "Coleções Especiais",
-          url: "/produtos/colecoes",
+          title: "Coleções",
+          url: "/admin/produtos/colecoes",
         },
       ],
     },
@@ -136,7 +136,7 @@ const data = {
       icon: Map,
     },
   ],
-}
+};
 
 const AppSidebar = ({ isOpen, isMobile, closeSidebar }: SidebarProps) => {
   return (

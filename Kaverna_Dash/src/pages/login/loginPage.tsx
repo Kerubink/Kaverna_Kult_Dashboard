@@ -1,6 +1,7 @@
 import { GalleryVerticalEnd } from "lucide-react"
 
 import { LoginForm } from "@/pages/login/components/login-form"
+import { Outlet } from "react-router-dom"
 
 export default function LoginPage() {
   return (
@@ -13,7 +14,7 @@ export default function LoginPage() {
           </div>
           Kaverna Analytics
         </a>
-        <LoginForm /> 
+        <Outlet/>
       </div>
     </div>
   )

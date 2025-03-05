@@ -14,8 +14,17 @@ import AllOrders from "@/pages/adminDashboard/pages/pedidos/pedidosPages/allOrde
 import DevolucaoPedidos from "@/pages/adminDashboard/pages/pedidos/pedidosPages/devolucaoPedidos";
 import PedidosCancelados from "@/pages/adminDashboard/pages/pedidos/pedidosPages/canceladosPedidos";
 import ListaArtistas from "@/pages/adminDashboard/pages/artistas/artistasPages/listaArtistas";
-import SolicitacoesArtistas from "@/pages/adminDashboard/pages/artistas/artistasPages/solicitacoes";
+import SolicitacoesArtistas from "@/pages/adminDashboard/pages/artistas/artistasPages/graficas";
 import Artistas from "@/pages/adminDashboard/pages/artistas/artistas";
+import Produtos from "@/pages/adminDashboard/pages/produtos/produtos";
+import ListaProdutos from "@/pages/adminDashboard/pages/produtos/produtosPages/listaProdutos";
+import ColecoesProdutos from "@/pages/adminDashboard/pages/produtos/produtosPages/colecoesProdutos";
+import CriarProduto from "@/pages/adminDashboard/pages/produtos/produtosPages/criarProduto";
+import { LoginForm } from "@/pages/login/components/login-form";
+import { RegistrationForm } from "@/pages/login/components/registration-form";
+import AdminGraphicsPage from "@/pages/adminDashboard/pages/artistas/artistasPages/graficas";
+import GraphicDashboard from "@/pages/graphicDashboard/graphicDashboard";
+import AdminGraphicsDetails from "@/pages/adminDashboard/pages/artistas/artistasPages/ AdminGraphicsDetails";
 
 const AppRoutes = () => {
   const { user, role, loading } = useAuth();
@@ -25,7 +34,11 @@ const AppRoutes = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/login" element={<Login />} />
+        <Route path="/login/*" element={<Login />}>
+          <Route index element={<Navigate to="signin" replace />} />
+          <Route path="signin" element={<LoginForm />} />
+          <Route path="signup" element={<RegistrationForm />} />
+        </Route>
 
         {/* Rotas de Admin */}
         {user && role === "admin" ? (
@@ -34,7 +47,10 @@ const AppRoutes = () => {
             {/* Redireciona /admin para /admin/home */}
             <Route path="home" element={<Home />} />
             <Route path="pedidos" element={<Pedidos />}>
-              <Route index element={<Navigate to="todos_os_pedidos" replace />} />
+              <Route
+                index
+                element={<Navigate to="todos_os_pedidos" replace />}
+              />
               <Route path="todos_os_pedidos" element={<AllOrders />} />
               <Route path="pedidos_devolucao" element={<DevolucaoPedidos />} />
               <Route
@@ -42,10 +58,23 @@ const AppRoutes = () => {
                 element={<PedidosCancelados />}
               />
             </Route>
-            <Route path="artistas" element={<Artistas />}>
-              <Route index element={<Navigate to="lista_de_artistas" replace />} />
-              <Route path="lista_de_artistas" element={<ListaArtistas />} />
-              <Route path="solicitacoes" element={<SolicitacoesArtistas />} />
+            <Route path="parceiros" element={<Artistas />}>
+              <Route
+                index
+                element={<Navigate to="artistas" replace />}
+              />
+              <Route path="artistas" element={<ListaArtistas />} />
+              <Route path="graficas" element={<AdminGraphicsPage />} />
+              <Route path="graficas/:id" element={<AdminGraphicsDetails />} />
+            </Route>
+            <Route path="produtos" element={<Produtos />}>
+              <Route
+                index
+                element={<Navigate to="lista_de_produtos" replace />}
+              />
+              <Route path="lista_de_produtos" element={<ListaProdutos />} />
+              <Route path="Criar_Produto" element={<CriarProduto />} />
+              <Route path="colecoes" element={<ColecoesProdutos />} />
             </Route>
           </Route>
         ) : (
@@ -59,6 +88,13 @@ const AppRoutes = () => {
           <Route path="/artist/*" element={<Navigate to="/login" />} />
         )}
 
+        {/* Rotas de Artista */}
+        {user && role === "graphic" ? (
+          <Route path="/graphic/*" element={<GraphicDashboard />} />
+        ) : (
+          <Route path="/graphic/*" element={<Navigate to="/login" />} />
+        )}
+
         {/* Redirecionamento padrão */}
         <Route
           path="*"
@@ -66,6 +102,8 @@ const AppRoutes = () => {
             user ? (
               role === "admin" ? (
                 <Navigate to="/admin/home" />
+              ) : role === "graphic" ? (
+                <Navigate to="/graphic" />
               ) : (
                 <Navigate to="/artist" />
               )
