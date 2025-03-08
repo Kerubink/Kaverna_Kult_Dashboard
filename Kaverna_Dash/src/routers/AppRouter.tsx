@@ -26,6 +26,7 @@ import AdminGraphicsPage from "@/pages/adminDashboard/pages/artistas/artistasPag
 import GraphicDashboard from "@/pages/graphicDashboard/graphicDashboard";
 import AdminGraphicsDetails from "@/pages/adminDashboard/pages/artistas/artistasPages/ AdminGraphicsDetails";
 import ArtistaDetalhes from "@/pages/adminDashboard/pages/artistas/artistasPages/ AdminArtistDetails";
+import OrderDetails from "@/pages/adminDashboard/pages/pedidos/pedidosPages/orderDetail";
 
 const AppRoutes = () => {
   const { user, role, loading } = useAuth();
@@ -53,6 +54,7 @@ const AppRoutes = () => {
                 element={<Navigate to="todos_os_pedidos" replace />}
               />
               <Route path="todos_os_pedidos" element={<AllOrders />} />
+              <Route path="todos_os_pedidos/:id" element={<OrderDetails />} />
               <Route path="pedidos_devolucao" element={<DevolucaoPedidos />} />
               <Route
                 path="pedidos_cancelados"
