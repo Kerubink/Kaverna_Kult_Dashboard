@@ -9,8 +9,8 @@ function HeaderSidebar() {
             <Command className="size-4" />
           </div>
           <div className="grid flex-1 text-left text-sm leading-tight">
-            <span className="truncate font-semibold">Acme Inc</span>
-            <span className="truncate text-xs">Enterprise</span>
+            <span className="truncate font-semibold">Kaverna Kult</span>
+            <span className="truncate text-xs">Admin</span>
           </div>
         </a>
       </header>

@@ -1,3 +1,7 @@
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { collection, getDocs, query, where } from "firebase/firestore";
+import { db } from "@/database/firebase_config";
 import {
   Card,
   CardContent,
@@ -30,6 +34,47 @@ import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 function TableArtistas() {
+  const [artists, setArtists] = useState<any[]>([]);
+  const [search, setSearch] = useState("");
+  const navigate = useNavigate();
+
+  // Buscar artistas no Firestore
+  useEffect(() => {
+    const fetchArtists = async () => {
+      try {
+        const usersRef = collection(db, "users");
+        const q = query(usersRef, where("role", "==", "artist"));
+        const querySnapshot = await getDocs(q);
+
+        const artistsList: any[] = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          name: doc.data().name,
+          username: doc.data().username || "Sem username",
+          phone: doc.data().phone || "Sem telefone",
+          email: doc.data().email,
+          portfolio: doc.data().portfolio || "Sem portfólio",
+          estampas: doc.data().estampas || 0,
+          popularidade: doc.data().popularidade || 0,
+          status: doc.data().status || "Ativo",
+          avatar: doc.data().avatar || "", // Avatar do artista
+        }));
+
+        setArtists(artistsList);
+      } catch (error) {
+        console.error("Erro ao buscar artistas:", error);
+      }
+    };
+
+    fetchArtists();
+  }, []);
+
+  // Filtrar artistas pelo nome ou username
+  const filteredArtists = artists.filter(
+    (artist) =>
+      artist.name.toLowerCase().includes(search.toLowerCase()) ||
+      artist.username.toLowerCase().includes(search.toLowerCase())
+  );
+
   return (
     <Card className="text-white h-[750px] lg:h-[950px] border-none overflow-hidden flex gap-4 flex-col">
       <CardHeader className="rounded-2xl p-0 py-3">
@@ -45,12 +90,14 @@ function TableArtistas() {
               <Input
                 placeholder="Buscar..."
                 className="w-[160px] lg:w-[350px]"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
               />
             </CardTitle>
           </CardHeader>
           <CardContent className="p-0 rounded-md border-none flex-1">
-            <ScrollArea className="h-full max-w-[300px] min-w-full  lg:w-full whitespace-nowrap rounded-md border">
-              <Table className="">
+            <ScrollArea className="h-full max-w-[300px] min-w-full lg:w-full whitespace-nowrap rounded-md border">
+              <Table>
                 <TableHeader>
                   <TableRow>
                     <TableHead>Artista</TableHead>
@@ -63,34 +110,50 @@ function TableArtistas() {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  <TableRow>
-                    <TableCell className="flex gap-3">
-                      <Avatar>
-                        <AvatarImage src="https://github.com/shadcn.png" />
-                        <AvatarFallback>CN</AvatarFallback>
-                      </Avatar>
-                      <div>
-                        <h2 className="text-white font-bold">João</h2>
-                        <span className="text-neutral-500">@joaodasartes</span>
-                      </div>
-                    </TableCell>
-                    <TableCell className="">
-                      <h2>(99)99999-9999</h2>
-                      <a href="mailto:joaozinho@gmail.com">
-                        Joaozinho@gmail.com
-                      </a>
-                    </TableCell>
-                    <TableCell>link.com.br</TableCell>
-                    <TableCell className="text-right">15</TableCell>
-                    <TableCell className="text-right">1</TableCell>
-                    <TableCell className="text-right">Ativo</TableCell>
-                    <TableCell className="text-right">
-                      {/* esse botao deve levar para a rota "produto:id" que mostra as informações detalhadas do produto*/}
-                      <Button className="w-6 h-6 p-4 bg-transparent cursor-pointer">
-                        <Eye size={20} />
-                      </Button>
-                    </TableCell>
-                  </TableRow>
+                  {filteredArtists.length > 0 ? (
+                    filteredArtists.map((artist) => (
+                      <TableRow key={artist.id}>
+                        <TableCell className="flex gap-3">
+                          <Avatar>
+                            <AvatarImage src={artist.avatar || "https://via.placeholder.com/150"} />
+                            <AvatarFallback>
+                              {artist.name.slice(0, 2).toUpperCase()}
+                            </AvatarFallback>
+                          </Avatar>
+                          <div>
+                            <h2 className="text-white font-bold">{artist.name}</h2>
+                            <span className="text-neutral-500">@{artist.username}</span>
+                          </div>
+                        </TableCell>
+                        <TableCell>
+                          <h2>{artist.phone}</h2>
+                          <a href={`mailto:${artist.email}`}>{artist.email}</a>
+                        </TableCell>
+                        <TableCell>
+                          <a href={artist.portfolio} target="_blank" rel="noopener noreferrer">
+                            {artist.portfolio}
+                          </a>
+                        </TableCell>
+                        <TableCell className="text-right">{artist.estampas}</TableCell>
+                        <TableCell className="text-right">{artist.popularidade}</TableCell>
+                        <TableCell className="text-right">{artist.status}</TableCell>
+                        <TableCell className="text-right">
+                          <Button
+                            className="w-6 h-6 p-4 bg-transparent cursor-pointer"
+                            onClick={() => navigate(`/admin/parceiros/artistas/${artist.id}`)}
+                          >
+                            <Eye size={20} />
+                          </Button>
+                        </TableCell>
+                      </TableRow>
+                    ))
+                  ) : (
+                    <TableRow>
+                      <TableCell colSpan={7} className="text-center">
+                        Nenhum artista encontrado.
+                      </TableCell>
+                    </TableRow>
+                  )}
                 </TableBody>
               </Table>
               <ScrollBar orientation="horizontal" />

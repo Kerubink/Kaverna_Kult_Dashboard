@@ -25,6 +25,7 @@ import { RegistrationForm } from "@/pages/login/components/registration-form";
 import AdminGraphicsPage from "@/pages/adminDashboard/pages/artistas/artistasPages/graficas";
 import GraphicDashboard from "@/pages/graphicDashboard/graphicDashboard";
 import AdminGraphicsDetails from "@/pages/adminDashboard/pages/artistas/artistasPages/ AdminGraphicsDetails";
+import ArtistaDetalhes from "@/pages/adminDashboard/pages/artistas/artistasPages/ AdminArtistDetails";
 
 const AppRoutes = () => {
   const { user, role, loading } = useAuth();
@@ -66,6 +67,7 @@ const AppRoutes = () => {
               <Route path="artistas" element={<ListaArtistas />} />
               <Route path="graficas" element={<AdminGraphicsPage />} />
               <Route path="graficas/:id" element={<AdminGraphicsDetails />} />
+              <Route path="artistas/:id" element={<ArtistaDetalhes/>}/>
             </Route>
             <Route path="produtos" element={<Produtos />}>
               <Route
