@@ -27,6 +27,7 @@ import GraphicDashboard from "@/pages/graphicDashboard/graphicDashboard";
 import AdminGraphicsDetails from "@/pages/adminDashboard/pages/artistas/artistasPages/ AdminGraphicsDetails";
 import ArtistaDetalhes from "@/pages/adminDashboard/pages/artistas/artistasPages/ AdminArtistDetails";
 import OrderDetails from "@/pages/adminDashboard/pages/pedidos/pedidosPages/orderDetail";
+import ProductDetail from "@/pages/adminDashboard/pages/produtos/produtosPages/productDetail";
 
 const AppRoutes = () => {
   const { user, role, loading } = useAuth();
@@ -78,6 +79,7 @@ const AppRoutes = () => {
               />
               <Route path="lista_de_produtos" element={<ListaProdutos />} />
               <Route path="Criar_Produto" element={<CriarProduto />} />
+              <Route path="lista_de_produtos/:id" element={<ProductDetail/>} />
               <Route path="colecoes" element={<ColecoesProdutos />} />
             </Route>
           </Route>
